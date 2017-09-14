@@ -3,7 +3,8 @@
 <head>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script type="text/javascript">
-
+//https://stackoverflow.com/questions/29261304/how-to-get-the-click-coordinates-relative-to-svg-element-holding-the-onclick-lis
+//https://stackoverflow.com/questions/6858479/rectangle-coordinates-after-transform
 		 $( document ).ready( function(){
 // Find your root SVG element
 			var svg = document.querySelector('svg');
@@ -105,11 +106,12 @@
 			},false);
 
 			var dx, dy, movementTimer;
-
-			$("#runbutton").click(function(){
-				movementTimer = setInterval(function(){
-
-					runBug2();
+			 var currentAlgorithm;
+			 
+			 function startRunning(){
+					movementTimer = setInterval(function(){
+					currentAlgorithm();
+					//runBug2();
 
 					if(Math.hypot(GX()-RX(),GY()-RY())>1 && (dx!=0 || dy!=0)){
 						var speedNorm = Math.hypot(dx,dy)/.5;
@@ -126,7 +128,15 @@
 
 					}
 				}, 10);
+			 }
+
+			$("#runButton").click(function(){
+				$(".path").remove();
+				currentAlgorithm = runRightTurn;
+				startRunning();
 			});
+			 
+			 $("#stopButton").click(function(){clearInterval(movementTimer)});
 
 			function pointInsidePolygon(p, poly){
 				var intersects = [], n=0;
@@ -242,19 +252,17 @@
 				return p;
 			}
 
-			function runBug1(){
-				dx = GX() - RX();
+			function runRightTurn(){
+				dx = GX() - RX();	//go straight towards goal
 				dy = GY() - RY();
 				var cp = collision();
 				if(cp){
-					var ang = Math.atan2(cp.y-RY(),cp.x-RX());//+Math.PI/2;
-					var ang2 = Math.atan2(-dy,-dx);
-					if((-dy*(cp.y-RY())-dx*(cp.x-RX()))<0){
-						dx = RY() - cp.y;
+					if((dy*(cp.y-RY())+dx*(cp.x-RX()))>0){ //if collision point is in path of robot +-90 degrees
+						dx = RY() - cp.y; //turn 90 degrees to the right
 						dy = cp.x - RX();
-					}
-				}
-			}
+					}//if...
+				}//if(cp)
+			}//runBug1
 
 
 
@@ -299,12 +307,14 @@
 </head>
 
 <body>
-<a id="runbutton">run</a>
 
 <svg id="mydrawing" width="600" height="400" style="border:1px solid black">
 	<circle class="draggable" id="robot" cx="50" cy="50" r="20" fill="red" />
 	<circle class="draggable" id="goal" cx="550" cy="350" r="18" fill="green" />
-</svg>
+</svg><br/>
+<a id="runButton">run</a>
+<a id="stopButton">stop</a>
+
 
 </body>
 </html>
