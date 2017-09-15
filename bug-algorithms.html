@@ -135,6 +135,12 @@
 				startRunning();
 			});
 			 
+			$("#runBug1").click(function(){
+				$(".path").remove();
+				currentAlgorithm = runBug1;
+				startRunning();
+			});		
+			
 			$("#runBug2").click(function(){
 				$(".path").remove();
 				currentAlgorithm = runBug2;
@@ -257,9 +263,66 @@
 						dy = cp.x - RX();
 					}//if...
 				}//if(cp)
+			}//runRightTurn
+			
+			var bug1={following:false}
+			function runBug1(){
+				dx = GX() - RX();
+				dy = GY() - RY();
+				var cp = collision();
+				if(cp) {
+					if(!bug1.following){
+						if((dx*(cp.x-RX())+dy*(cp.y-RY()))>0){ //if collision is in front
+							bug1.following = true;				//start following
+							bug1.startFollowing = true;
+							bug1.returning = false;
+							bug1.startPoint = {x:RX(),y:RY()};
+							bug1.closestPoint = {x:RX(),y:RY()};
+							bug1.minDistance = Math.hypot(GX()-RX(),GY()-RY());
+						}
+					}
+					if(bug1.following){
+						if(Math.hypot(RX()-bug1.startPoint.x, RY()-bug1.startPoint.y) > 2) { //if we've gotten far enough away from start point
+							bug1.startFollowing = false;
+						} else {	//we're close to start point
+							if(!bug1.startFollowing) { //and not still starting
+								bug1.returning = true;	//return to closest point
+							}
+						}
+						if(!bug1.returning) { //if we're not returning yet, keep track of closest point
+							var distanceToGoal = Math.hypot(GX()-RX(), GY()-RY());
+							if(distanceToGoal < bug1.minDistance) {
+								bug1.minDistance = distanceToGoal;
+								bug1.closestPoint = {x:RX(),y:RY()};
+							}
+						} else { //we're returning to closest point
+							if(Math.hypot(RX()-bug1.closestPoint.x,RY()-bug1.closestPoint.y)<3) {
+								bug1.following = false;
+							}
+						}
+						if(bug1.following){
+						dx = RY() - cp.y;
+						dy = cp.x - RX();
+						bug2.lastContact = {x:cp.x,y:cp.y};
+						}
+						/*
+						//var cs = closestPointOnSegment(RX(), RY(), bug2.startPoint.x, bug2.startPoint.y, GX(), GY());
+						if((dx*(cp.x-RX())+dy*(cp.y-RY()))<0 && Math.hypot(cs.x-RX(),cs.y-RY())<2){
+							bug2.following = false;
+						} else{
+							dx = RY() - cp.y;
+							dy = cp.x - RX();
+							bug2.lastContact = {x:cp.x,y:cp.y};
+						}
+						*/
+					}
+				} else {
+					if(bug1.following) { //if following wall but lost contact
+						dx = bug1.lastContact.x - RX();
+						dy = bug1.lastContact.y - RY();
+					}
+				}
 			}//runBug1
-
-
 
 			var bug2={following:false};
 
@@ -301,8 +364,9 @@
 	<circle class="draggable" id="robot" cx="50" cy="50" r="20" fill="red" />
 	<circle class="draggable" id="goal" cx="550" cy="350" r="18" fill="green" />
 </svg><br/>
-<a id="runRightTurn">Run Right-Turn method</a>
-<a id="runBug2">Run Bug2</a>
+<a id="runRightTurn">Run Right-Turn method</a><br/>
+<a id="runBug1">Run Bug1</a><br/>
+<a id="runBug2">Run Bug2</a><br/>
 <a id="stopButton">stop</a>
 
 
