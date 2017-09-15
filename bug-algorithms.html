@@ -269,6 +269,9 @@
 			function runBug1(){
 				dx = GX() - RX();
 				dy = GY() - RY();
+				if(bug1.following && !bug1.returning) {
+					bug1.steps++;
+				}
 				var cp = collision();
 				if(cp) {
 					if(!bug1.following){
@@ -279,8 +282,10 @@
 							bug1.startPoint = {x:RX(),y:RY()};
 							bug1.closestPoint = {x:RX(),y:RY()};
 							bug1.minDistance = Math.hypot(GX()-RX(),GY()-RY());
+							bug1.steps = 0;
 						}
 					}
+					console.log("f:"+bug1.following+" sf:"+bug1.startFollowing+" r:"+bug1.returning)
 					if(bug1.following){
 						if(Math.hypot(RX()-bug1.startPoint.x, RY()-bug1.startPoint.y) > 2) { //if we've gotten far enough away from start point
 							bug1.startFollowing = false;
@@ -294,6 +299,7 @@
 							if(distanceToGoal < bug1.minDistance) {
 								bug1.minDistance = distanceToGoal;
 								bug1.closestPoint = {x:RX(),y:RY()};
+								bug1.closestPointStep = bug1.steps;
 							}
 						} else { //we're returning to closest point
 							if(Math.hypot(RX()-bug1.closestPoint.x,RY()-bug1.closestPoint.y)<3) {
@@ -301,20 +307,14 @@
 							}
 						}
 						if(bug1.following){
-						dx = RY() - cp.y;
-						dy = cp.x - RX();
-						bug2.lastContact = {x:cp.x,y:cp.y};
-						}
-						/*
-						//var cs = closestPointOnSegment(RX(), RY(), bug2.startPoint.x, bug2.startPoint.y, GX(), GY());
-						if((dx*(cp.x-RX())+dy*(cp.y-RY()))<0 && Math.hypot(cs.x-RX(),cs.y-RY())<2){
-							bug2.following = false;
-						} else{
 							dx = RY() - cp.y;
 							dy = cp.x - RX();
-							bug2.lastContact = {x:cp.x,y:cp.y};
+							bug1.lastContact = {x:cp.x,y:cp.y};
+							if(bug1.returning && bug1.closestPointStep>(bug1.steps/2)){
+								dx = -dx;
+								dy = -dy;
+							}
 						}
-						*/
 					}
 				} else {
 					if(bug1.following) { //if following wall but lost contact
