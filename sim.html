@@ -56,7 +56,29 @@
 
 
 			//mousedown handler
+			//disable regular rightclick menu
+			$('body').bind("contextmenu", function(e) {
+				console.log(e);
+   				e.preventDefault();
+				return false;
+			});
+
+			//hide menu after clicking button
+			$('#menu').click(function(){
+				$('#menu').hide();
+			});
+
 			svg.addEventListener('mousedown', function (evt) {
+				if(evt.which==3){
+					evt.preventDefault();
+					evt.stopPropagation();
+					$('#menu').show().css('left',evt.clientX).css('top',evt.clientY);
+					return false;
+				}
+				if($('#menu').is(":visible")){
+					$('#menu').hide();
+					return false;
+				}
 				var loc = cursorPoint(evt); //record where mouse started
 				drawing = true;
 				hp = loc;
@@ -356,23 +378,32 @@
 			};
 		});
 	</script>
+
+	<style>
+		#menu button {
+			width:100%;
+		}
+	</style>
 </head>
 
 <body>
-	<h3>Robot bug algorithm simulator</h3>
+	<!-- <h3>Robot bug algorithm simulator</h3>
 	<p>Click to draw <span style="color:blue">obstacle</span> edges. Double-click to finish obstacle. Double-click inside obstacle to remove.</p>
 	<p>Click and drag to move <span style="color:red">robot</span> or <span style="color:green">goal</span>.</p>
-	<svg id="mydrawing" width="600" height="400" style="border:1px solid black">
+	 -->
+
+	<svg id="mydrawing" style="position:absolute;top:0;left:0;width:100%;height:100%">
 		<circle class="draggable" id="robot" cx="50" cy="50" r="20" fill="red" />
 		<circle class="draggable" id="goal" cx="550" cy="350" r="18" fill="green" />
 	</svg>
 	<br/>
 
-	<button id="runRightTurn">Run Right-Turn method</button> 
-	<button id="runBug1">Run Bug1</button> 
-	<button id="runBug2">Run Bug2</button> 
+	<div id="menu" style="position: absolute; display:none; border:1px solid black;">
+	<button id="runRightTurn">Run Right-Turn</button> <br>
+	<button id="runBug1">Run Bug1</button> <br>
+	<button id="runBug2">Run Bug2</button> <br>
 	<button id="stopButton">stop</button>
-
+	</div>
 
 </body>
 
