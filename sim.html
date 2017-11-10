@@ -143,6 +143,7 @@
 				movementTimer = setInterval(function () {
 					alg();
 
+
 					//move robot in direction of dx,dy
 					if (Math.hypot(GX() - RX(), GY() - RY()) > 1 && (dx != 0 || dy != 0)) {
 						var speedNorm = Math.hypot(dx, dy) / 1.5;
@@ -158,6 +159,8 @@
 							.addClass('path')
 							.appendTo($('#mydrawing'));
 
+					} else { //at the goal, stop
+						clearInterval(movementTimer);
 					}
 				}, 10);
 			}
