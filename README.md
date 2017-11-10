@@ -20,6 +20,12 @@ The robot moves toward the goal. If it hits an object, it circumnavigates the ob
 
 ![](https://i.imgur.com/KQWwbB3.png)
 
+## Bug 2
+
+The robot moves toward the goal. If it hits an object, it remembers a line from the robot to the goal. It circles the object until it meets this line again at a place closer to the goal than the point of collision.
+
+![](https://i.imgur.com/hJt5Uae.png)
+
 # Simulator
 
 Click to draw <span style="color:blue">obstacle</span> edges. Double-click to finish obstacle. Double-click inside obstacle to remove.
@@ -27,5 +33,7 @@ Click to draw <span style="color:blue">obstacle</span> edges. Double-click to fi
 Click and drag to move <span style="color:red">robot</span> or <span style="color:green">goal</span>.
 
 Right-click to choose an algorithm and run the simulation.
+
+<a href="#" onClick="MyWindow=window.open('sim.html','MyWindow',width=600,height=400); return false;">Open in new window</a>
 
 <iframe src="sim.html" style="width:600px;height:400px"></iframe>
