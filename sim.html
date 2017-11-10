@@ -145,7 +145,7 @@
 
 					//move robot in direction of dx,dy
 					if (Math.hypot(GX() - RX(), GY() - RY()) > 1 && (dx != 0 || dy != 0)) {
-						var speedNorm = Math.hypot(dx, dy) / .5;
+						var speedNorm = Math.hypot(dx, dy) / 1.5;
 						$('#robot').attr('cx', RX() + dx / speedNorm);
 						$('#robot').attr('cy', RY() + dy / speedNorm);
 
