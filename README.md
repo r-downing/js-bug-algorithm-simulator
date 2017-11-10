@@ -12,4 +12,4 @@ Click and drag to move <span style="color:red">robot</span> or <span style="colo
 
 Right-click to choose an algorithm and run the simulation.
 
-<iframe src="sim.html" style="border:0;width:600px;height:400px"></iframe>
+<iframe src="sim.html" style="width:600px;height:400px"></iframe>
