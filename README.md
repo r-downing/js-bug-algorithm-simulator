@@ -7,11 +7,18 @@ The robot only has knowledge of three things: the global position of itself, the
 ## Right Turn Method
 
 With this method, the robot moves straight toward the goal. If it hits an obstacle, it turns right and follows the wall until it has a straight path to the goal again.
+
 ![](https://i.imgur.com/albGKkB.png)
 
 This method can fail though...
 
 ![](https://i.imgur.com/vXyh83x.png)
+
+## Bug 1
+
+The robot moves toward the goal. If it hits an object, it circumnavigates the object, keeping track of the closest it gets to the goal. Once it has completely circled the object, it returns to the closest point, then proceeds from there.
+
+![](https://i.imgur.com/KQWwbB3.png)
 
 # Simulator
 
