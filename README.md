@@ -47,4 +47,4 @@ Run simulator below or <a href="#" onClick="MyWindow=window.open('sim.html','MyW
 
 ----
 
-[Home](https://ryandowning.net)
+[Home](http://ryandowning.net)
