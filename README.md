@@ -34,6 +34,6 @@ Click and drag to move <span style="color:red">robot</span> or <span style="colo
 
 Right-click to choose an algorithm and run the simulation.
 
-<a href="#" onClick="MyWindow=window.open('sim.html','MyWindow',width=600,height=400); return false;">Open in new window</a>
+Run simulator below or <a href="#" onClick="MyWindow=window.open('sim.html','MyWindow',width=600,height=400); return false;">open in new window</a>
 
 <iframe src="sim.html" style="width:600px;height:400px"></iframe>
