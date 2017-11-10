@@ -1,6 +1,13 @@
 # js-bug-algorithm-simulator
 Robot simulator that runs bug algorithms with an svg display
 
+- [js-bug-algorithm-simulator](#js-bug-algorithm-simulator)
+- [How it works](#how-it-works)
+	- [Right Turn Method](#right-turn-method)
+	- [Bug 1](#bug-1)
+	- [Bug 2](#bug-2)
+- [Simulator](#simulator)
+
 # How it works
 The robot only has knowledge of three things: the global position of itself, the global position of the goal, and the point at which it is in collision with an obstacle, if any.
 
