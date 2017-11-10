@@ -1,8 +1,17 @@
 # js-bug-algorithm-simulator
 Robot simulator that runs bug algorithms with an svg display
 
-## How it works
+# How it works
 The robot only has knowledge of three things: the global position of itself, the global position of the goal, and the point at which it is in collision with an obstacle, if any.
+
+## Right Turn Method
+
+With this method, the robot moves straight toward the goal. If it hits an obstacle, it turns right and follows the wall until it has a straight path to the goal again.
+![](https://i.imgur.com/albGKkB.png)
+
+This method can fail though...
+
+![](https://i.imgur.com/vXyh83x.png)
 
 # Simulator
 
