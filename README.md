@@ -44,3 +44,7 @@ Right-click to choose an algorithm and run the simulation.
 Run simulator below or <a href="#" onClick="MyWindow=window.open('sim.html','MyWindow',width=600,height=400); return false;">open in new window</a>
 
 <iframe src="sim.html" style="width:600px;height:400px"></iframe>
+
+----
+
+[Home](ryandowning.net)
