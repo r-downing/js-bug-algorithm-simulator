@@ -35,7 +35,7 @@ The robot moves toward the goal. If it hits an object, it remembers a line from 
 
 # Simulator
 
-Click to draw <span style="color:blue">obstacle</span> edges. Double-click to finish obstacle. Double-click inside obstacle to remove.
+Click to draw <span style="color:blue;background-color:white">obstacle</span> edges. Double-click to finish obstacle. Double-click inside obstacle to remove.
 
 Click and drag to move <span style="color:red">robot</span> or <span style="color:green">goal</span>.
 
