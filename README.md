@@ -1,5 +1,5 @@
 # js-bug-algorithm-simulator
-Robot simulator that runs bug algorithms with an svg display
+Robot simulator that runs bug algorithms. It was built with jQuery and an svg display.
 
 - [js-bug-algorithm-simulator](#js-bug-algorithm-simulator)
 - [How it works](#how-it-works)
